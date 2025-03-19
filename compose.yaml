@@ -15,6 +15,20 @@ services:
     networks:
       - rihal_network
 
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: web
+    env_file:
+      - ./frontend/.env
+    networks:
+      - rihal_network
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+
   db:
     image: postgres:15
     container_name: psql-db

@@ -42,10 +42,11 @@ class CrimeDataPipeline:
 
         df = self.remove_invalid_records(df)
         
+        # no need for apply (bad preformance) but the dataset is small so it is fine
         df['crime_type'] = df['crime_type'].apply(self.correct_spelling)
         
         df['nearest_police_patrol'] = df['nearest_police_patrol'].apply(self.convert_to_km)
-        
+                
         df = self.split_timestamp(df)
         
         return df

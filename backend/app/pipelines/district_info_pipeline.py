@@ -140,10 +140,18 @@ class DistrictInfoPipeline:
         
         df.columns = df.iloc[0]
         df = df.drop(0)
-        
+
         df.iloc[:, 0] = range(1, len(df) + 1)
         
         df = df.replace(r'\n', ' ', regex=True).infer_objects(copy=False)
+        
+        df.columns = (df.columns
+            .str.lower()
+            .str.replace(r'\s+', '', regex=True)
+            .str.replace(r'[^a-z0-9_]', '_', regex=True)
+        )
+
+        df['population'] = df['population'].str.replace(',', '').astype(int)
         
         if os.path.exists(self.temp_image):
             os.remove(self.temp_image)
