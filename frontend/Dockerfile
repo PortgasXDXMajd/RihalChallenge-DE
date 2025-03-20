@@ -1,9 +1,11 @@
 FROM node:18
+
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
 COPY . .
+
+RUN yarn install
+
 EXPOSE 3000
 
 CMD ["sh", "-c", "yarn build && yarn start"]
