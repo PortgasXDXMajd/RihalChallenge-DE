@@ -31,15 +31,15 @@ Welcome to the Rihal Data Engineering Challenge! Follow the instructions below t
     - The web app displays answers to the challenge questions using data fetched via SQL queries.
 
 - **pgAdmin (Database Management)**
-- Open your browser and go to: `http://localhost:5050`
-- Log in with the following credentials:
-    - **Email**: `admin@rihal.com`
-    - **Password**: `admin`
-- Register a server to connect to the PostgreSQL database:
-    - **Host**: `db`
-    - **Username**: `rihal_user`
-    - **Password**: `rihal_pwd`
+    - Open your browser and go to: `http://localhost:5050`
+    - Log in with the following credentials:
+        - **Email**: `admin@rihal.com`
+        - **Password**: `admin`
+    - Register a server to connect to the PostgreSQL database:
+        - **Host**: `db`
+        - **Username**: `rihal_user`
+        - **Password**: `rihal_pwd`
 
-- **Database Details**
-    - Database name: `rihal_db`
-    - Table: `crime_data`
+    - **Database Details**
+        - Database name: `rihal_db`
+        - Table: `crime_data`
