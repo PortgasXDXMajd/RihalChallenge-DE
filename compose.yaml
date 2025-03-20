@@ -28,6 +28,8 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/app
+    depends_on:
+      - api
 
   db:
     image: postgres:15
