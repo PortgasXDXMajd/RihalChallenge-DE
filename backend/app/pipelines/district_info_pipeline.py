@@ -1,4 +1,5 @@
 import os
+import threading
 import cv2
 import numpy as np
 import pytesseract
@@ -13,8 +14,14 @@ class DistrictInfoPipeline:
         self.temp_image = "temp_image.png"
         self.output_dir = "output_cells"
         
+        self.model_thread = threading.Thread(target=self.download_trocr_model)
+        self.model_thread.start()
+
+    def download_trocr_model(self):
+        print("Downloading TrOCR model...")
         self.processor = TrOCRProcessor.from_pretrained('microsoft/trocr-base-handwritten', use_fast=True)
         self.model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-base-handwritten')
+        print("TrOCR model download completed!")
 
     def convert_pdf_to_image(self):
         pages = convert_from_path(self.pdf_path, 500)
@@ -115,6 +122,11 @@ class DistrictInfoPipeline:
         return text if text else self.extract_text_with_trocr(image_path)
 
     def process(self):
+        
+        if self.model_thread.is_alive():
+            print("Waiting for the model to finish downloading...")
+            self.model_thread.join()
+
         self.convert_pdf_to_image()
         
         self.extract_table_cells()
